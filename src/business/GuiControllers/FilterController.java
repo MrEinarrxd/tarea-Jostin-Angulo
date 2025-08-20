@@ -83,6 +83,7 @@ public class FilterController {
             int day = Integer.parseInt(parts[0]);
             int month = Integer.parseInt(parts[1]);
             int year = Integer.parseInt(parts[2]);
+            dateRange[i] = LocalDate.of(year, month, day);
         }
         return dateRange;
     }

@@ -106,10 +106,22 @@ public class FilterGui extends JFrame {
     }
 
     // Métodos públicos para acceder a los campos desde el controlador
-    public JComboBox<String> getComboBox() { return comboBox; }
-    public JButton getBtnSelectFilter() { return btnSelectFilter; }
-    public JButton getBtnFiltrar() { return btnFiltrar; }
-    public JTextField getTextFieldIdFilter() { return textFieldIdFilter; }
-    public JTextField getTextFieldDayFilter() { return textFieldDayFilter; }
-    public JFormattedTextField getDateFilterFTxTF() { return dateFilterFTxTF; }
+    public JComboBox<String> getComboBox() {
+        return comboBox;
+    }
+    public JButton getBtnSelectFilter() {
+        return btnSelectFilter;
+    }
+    public JButton getBtnFiltrar() {
+        return btnFiltrar;
+    }
+    public JTextField getTextFieldIdFilter() {
+        return textFieldIdFilter;
+    }
+    public JTextField getTextFieldDayFilter() {
+        return textFieldDayFilter;
+    }
+    public JFormattedTextField getDateFilterFTxTF() {
+        return dateFilterFTxTF;
+    }
 }

@@ -17,7 +17,7 @@ public class FilterGui extends JFrame {
 
      @SuppressWarnings("unused")
     public FilterGui() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 500, 300);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));

@@ -12,8 +12,8 @@ public class ListGui extends JFrame {
 
      @SuppressWarnings("unused")
     public ListGui(String resultText) {
-        setTitle("Resultado del Filtro");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Resultado del Filtro");
         setBounds(100, 100, 600, 400);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));

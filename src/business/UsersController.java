@@ -6,13 +6,16 @@ import domain.Date;
 import domain.lists.DateNode;
 import domain.lists.List;
 import domain.lists.UserNode;
+import domain.lists.Utils;
 import domain.users.User;
 import domain.users.UserAssist;
 import domain.users.UserClient;
 import domain.users.UserVet;
 
 public class UsersController {
+
     public UsersController() {
+        Utils.loadUsersFromTxt("src/data/Users.txt");
     }
 
     public boolean addUser(User user, List list) {

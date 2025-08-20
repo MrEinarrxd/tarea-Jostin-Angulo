@@ -1,97 +1,73 @@
 package presentation;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 public class MainBottunGui extends JFrame {
+    private JComboBox<String> comboBox;
+    private JButton btnContinue;
+
     public static void main(String[] args) {
-    EventQueue.invokeLater(new Runnable() {
-        public void run() {
+        EventQueue.invokeLater(() -> {
             try {
                 MainBottunGui frame = new MainBottunGui();
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-    });
+        });
     }
-
-    private static final long serialVersionUID = 1L;
-    private JPanel topPanel;
-    private JPanel centerPanel;
-
-    private JLabel lblAddUser;
-    private JLabel lblUserList;
-    private JLabel lblUserFind;
-
-    private JButton btnAddUser;
-    private JButton btnUserList;
-    private JButton btnUserFind;
-
-
 
     public MainBottunGui() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(640, 480);
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        getContentPane().setLayout(new BorderLayout(0, 0));
 
-        JPanel contentPane = new JPanel();
-        contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(new BorderLayout(0, 0));
+        // Título superior
+        JPanel panelNorth = new JPanel();
+        panelNorth.setLayout(new BoxLayout(panelNorth, BoxLayout.Y_AXIS));
+        JLabel lblTitle = new JLabel("Sistema de Veterinaria");
+        lblTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        panelNorth.add(lblTitle);
+        panelNorth.add(Box.createVerticalStrut(10));
+        JLabel lblQuestion = new JLabel("¿Qué acción desea realizar?");
+        lblQuestion.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lblQuestion.setHorizontalAlignment(SwingConstants.CENTER);
+        panelNorth.add(lblQuestion);
+        getContentPane().add(panelNorth, BorderLayout.NORTH);
 
-        topPanel = new JPanel();
-        topPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        contentPane.add(topPanel, BorderLayout.NORTH);
+        // Centro con combo y botón
+        JPanel panelCenter = new JPanel();
+        panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
+        panelCenter.setBorder(BorderFactory.createEmptyBorder(40, 100, 40, 100));
 
-        centerPanel = new JPanel();
-        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 40));
-        contentPane.add(centerPanel, BorderLayout.CENTER);
+        comboBox = new JComboBox<>(new String[] {
+            "Agregar usuario", "Listado de usuarios", "Consultar usuario"
+        });
+        comboBox.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        panelCenter.add(comboBox);
+        panelCenter.add(Box.createVerticalStrut(20));
 
-        lblAddUser = new JLabel("Agregar Usuario:");
-        lblUserList = new JLabel("Lista de Usuarios:");
-        lblUserFind = new JLabel("Consultar Usuario:");
-        
-        btnAddUser = createButton("Agregar");
-        btnUserList = createButton("Lista");
-        btnUserFind = createButton("Consultar");
+        btnContinue = new JButton("Continuar");
+        btnContinue.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelCenter.add(btnContinue);
 
-    centerPanel.add(createPair(lblAddUser.getText(), btnAddUser));
-    centerPanel.add(createPair(lblUserList.getText(), btnUserList));
-    centerPanel.add(createPair(lblUserFind.getText(), btnUserFind));
-
+        getContentPane().add(panelCenter, BorderLayout.CENTER);
     }
 
-    public JButton createButton(String text) {
-        JButton button = new JButton(text);
-        button.setPreferredSize(new Dimension(100, 30));
-        return button;
+    // Métodos públicos para acceder al combo y al botón desde el controlador
+    public JComboBox<String> getComboBox() {
+        return comboBox;
+    }
+
+    public JButton getBtnContinue() {
+        return btnContinue;
     }
 
     public void init() {
-    this.setVisible(true);
+        setVisible(true);
     }
-
-    private JPanel createPair(String labelText, JButton button) {
-        JPanel p = new JPanel(new BorderLayout());
-        p.add(new JLabel(labelText), BorderLayout.NORTH);
-        p.add(button, BorderLayout.CENTER);
-        return p;
-    }
-
-    public JButton getBtnAddUser() { return btnAddUser; }
-
-    public JButton getBtnUserList() { return btnUserList; }
-
-    public JButton getBtnUserFind() { return btnUserFind; }
 }

@@ -2,10 +2,13 @@ package business.GuiControllers;
 
 import presentation.AddGui;
 import business.UsersController;
+import data.FilesTxt;
 import domain.lists.Utils;
 import domain.users.UserAssist;
 import domain.users.UserClient;
 import domain.users.UserVet;
+
+import javax.swing.*;
 
 public class AddController {
     private AddGui view;
@@ -14,69 +17,98 @@ public class AddController {
     public AddController(UsersController usersController) {
         this.view = new AddGui();
         this.usersController = usersController;
-
+        setupListeners();
+    }
+    @SuppressWarnings("unused")
+    private void setupListeners() {
+        view.getBtnAgregar().addActionListener(e -> {
+            int selected = view.getComboBox().getSelectedIndex();
+            switch (selected) {
+                case 0:
+                    UserClient client = createUserFromFields();
+                    if (client != null) {
+                        usersController.addUser(client, Utils.UserList);
+                        JOptionPane.showMessageDialog(view, "Cliente agregado exitosamente.");
+                    }
+                    break;
+                case 1:
+                    UserVet vet = createVetFromFields();
+                    if (vet != null) {
+                        usersController.addUser(vet, Utils.UserList);
+                        JOptionPane.showMessageDialog(view, "Veterinario agregado exitosamente.");
+                    }
+                    break;
+                case 2:
+                    UserAssist assist = createAsistFromFields();
+                    if (assist != null) {
+                        usersController.addUser(assist, Utils.UserList);
+                        JOptionPane.showMessageDialog(view, "Asistente agregado exitosamente.");
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
     }
 
     public void showMenu() {
-        int option = view.chooseMenuOption();
-        switch (option) {
-            case 1:
-                usersController.addUser(createUser(), Utils.UserList);
-               System.out.println("Cliente agregado exitosamente.");
-                break;
-            case 2:
-                usersController.addUser(createVet(), Utils.UserList);
-               System.out.println("Veterinario agregado exitosamente.");
-                break;
-            case 3:
-                usersController.addUser(createAsist(), Utils.UserList);
-               System.out.println("Asistente agregado exitosamente.");
-                break;
-            default:
-                // Opción inválida o cancelar
-                break;
-        }
-    }
-    public UserClient createUser() {
-        int id = Integer.parseInt(view.getText("Ingrese el id del usuario:"));
-        String name = view.getText("Ingrese el nombre del usuario:");
-        String mail = view.getText("Ingrese el mail del usuario:");
-        int phone = Integer.parseInt(view.getText("Ingrese el número de teléfono del usuario:"));
-        String adress = view.getText("Ingrese la dirección del usuario:");
-        Boolean vip = view.getText("¿Es VIP? (1/0)").equals("1");
-
-        return new UserClient(id, name, mail, phone, adress, vip);
+        view.setVisible(true);
     }
 
-    public UserVet createVet() {
-        int id = Integer.parseInt(view.getText("Ingrese el id del veterinario:"));
-        String name = view.getText("Ingrese el nombre del veterinario:");
-        String mail = view.getText("Ingrese el mail del veterinario:");
-        int phone = Integer.parseInt(view.getText("Ingrese el número de teléfono del veterinario:"));
-        int licenseNumb = Integer.parseInt(view.getText("Ingrese el número de licencia:"));
-        String speciality = view.getText("Ingrese la especialidad del veterinario:");
-        double salary = Double.parseDouble(view.getText("Ingrese el salario del veterinario:"));
-        Boolean activity = view.getText("¿Está activo? (1/0)").equals("1");
-        Boolean[] schedule = new Boolean[7];
-        for (int i = 0; i < 7; i++) {
-            schedule[i] = view.getText("¿Trabaja el día " + (i + 1) + "? (1/0)").equals("1");
+    private UserClient createUserFromFields() {
+        try {
+            int id = Integer.parseInt(view.getTextFieldId().getText());
+            String name = view.getTextFieldName().getText();
+            String mail = view.getTextFieldMail().getText();
+            int phone = Integer.parseInt(view.getTextFieldPhone().getText());
+            String adress = JOptionPane.showInputDialog(view, "Ingrese la dirección del cliente:");
+            // Preguntar por VIP usando JOptionPane
+            Boolean vip = JOptionPane.showConfirmDialog(view, "¿Es cliente VIP?", "VIP", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+            return new UserClient(id, name, mail, phone, adress, vip);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(view, "Datos inválidos: " + ex.getMessage());
+            return null;
         }
-
-        return new UserVet(id, name, mail, phone, licenseNumb, speciality, salary, activity, schedule);
     }
 
-    public UserAssist createAsist() {
-        int id = Integer.parseInt(view.getText("Ingrese el id del asistente:"));
-        String name = view.getText("Ingrese el nombre del asistente:");
-        String mail = view.getText("Ingrese el mail del asistente:");
-        int phone = Integer.parseInt(view.getText("Ingrese el número de teléfono del asistente:"));
-        int activeYears = Integer.parseInt(view.getText("Ingrese los años activos del asistente:"));
-        Boolean active = view.getText("¿Está activo? (1/0)").equals("1");
-        Boolean[] schedule = new Boolean[7];
-        for (int i = 0; i < 7; i++) {
-            schedule[i] = view.getText("¿Trabaja el día " + (i + 1) + "? (1/0)").equals("1");
+    private UserVet createVetFromFields() {
+        try {
+            int id = Integer.parseInt(view.getTextFieldId().getText());
+            String name = view.getTextFieldName().getText();
+            String mail = view.getTextFieldMail().getText();
+            int phone = Integer.parseInt(view.getTextFieldPhone().getText());
+            // For simplicity, you may need to add extra fields for Vet in the GUI
+            int licenseNumb = Integer.parseInt(JOptionPane.showInputDialog(view, "Ingrese el número de licencia:"));
+            String speciality = JOptionPane.showInputDialog(view, "Ingrese la especialidad del veterinario:");
+            double salary = Double.parseDouble(JOptionPane.showInputDialog(view, "Ingrese el salario del veterinario:"));
+            Boolean activity = JOptionPane.showConfirmDialog(view, "¿Está activo?", "Actividad", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+            Boolean[] schedule = new Boolean[7];
+            for (int i = 0; i < 7; i++) {
+                schedule[i] = JOptionPane.showConfirmDialog(view, "¿Trabaja el día " + (i + 1) + "?", "Horario", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+            }
+            return new UserVet(id, name, mail, phone, licenseNumb, speciality, salary, activity, schedule);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(view, "Datos inválidos: " + ex.getMessage());
+            return null;
         }
+    }
 
-        return new UserAssist(id, name, mail, phone, activeYears, active, schedule);
+    private UserAssist createAsistFromFields() {
+        try {
+            int id = Integer.parseInt(view.getTextFieldId().getText());
+            String name = view.getTextFieldName().getText();
+            String mail = view.getTextFieldMail().getText();
+            int phone = Integer.parseInt(view.getTextFieldPhone().getText());
+            int activeYears = Integer.parseInt(JOptionPane.showInputDialog(view, "Ingrese los años activos del asistente:"));
+            Boolean active = JOptionPane.showConfirmDialog(view, "¿Está activo?", "Actividad", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+            Boolean[] schedule = new Boolean[7];
+            for (int i = 0; i < 7; i++) {
+                schedule[i] = JOptionPane.showConfirmDialog(view, "¿Trabaja el día " + (i + 1) + "?", "Horario", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+            }
+            return new UserAssist(id, name, mail, phone, activeYears, active, schedule);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(view, "Datos inválidos: " + ex.getMessage());
+            return null;
+        }
     }
 }

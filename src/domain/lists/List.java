@@ -72,4 +72,6 @@ public class List {
     public void setLastDateNode(DateNode lastDateNode) {
         this.lastDateNode = lastDateNode;
     }
+
+
 }

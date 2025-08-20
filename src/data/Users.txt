@@ -1,0 +1,21 @@
+# type;id;name;mailAdress;phoneNumber;adress/vet/assist fields...
+client;1;Maria Lopez;maria.lopez@email.com;88810001;Calle 1, San Jose;true
+client;2;Juan Perez;juan.perez@email.com;88810002;Calle 2, Heredia;false
+client;3;Lucia Vargas;lucia.vargas@email.com;88810003;Calle 3, Cartago;false
+client;4;Pedro Jimenez;pedro.jimenez@email.com;88810004;Calle 4, Alajuela;true
+client;5;Andrea Soto;andrea.soto@email.com;88810005;Calle 5, Puntarenas;false
+client;6;Diego Rojas;diego.rojas@email.com;88810006;Calle 6, Limon;true
+client;7;Valeria Mora;valeria.mora@email.com;88810007;Calle 7, Guanacaste;false
+client;8;Oscar Ramirez;oscar.ramirez@email.com;88810008;Calle 8, San Carlos;true
+vet;9;Dr. Laura Salas;laura.salas@email.com;88820001;1001;Cirugía;1200.50;true;true,true,true,true,true,false,false
+vet;10;Dr. Carlos Mendez;carlos.mendez@email.com;88820002;1002;Dermatología;1100.00;true;true,true,false,true,true,false,false
+vet;11;Dr. Sofia Herrera;sofia.herrera@email.com;88820003;1003;Oftalmología;1300.75;false;false,false,true,true,true,true,false
+vet;12;Dr. Pablo Castro;pablo.castro@email.com;88820004;1004;Cardiología;1250.00;true;true,false,true,false,true,true,false
+vet;13;Dr. Ana Quesada;ana.quesada@email.com;88820005;1005;Oncología;1400.00;true;true,true,true,true,true,true,true
+vet;14;Dr. Mario Vargas;mario.vargas@email.com;88820006;1006;Neurología;1350.00;false;false,false,false,false,true,true,true
+assist;15;Camila Jimenez;camila.jimenez@email.com;88830001;3;true;true,true,true,true,false,false,false
+assist;16;Esteban Solis;esteban.solis@email.com;88830002;5;true;true,true,false,false,true,true,false
+assist;17;Daniela Pineda;daniela.pineda@email.com;88830003;2;false;false,true,true,true,false,false,true
+assist;18;Jorge Castillo;jorge.castillo@email.com;88830004;4;true;true,false,true,false,true,false,true
+assist;19;Paola Navarro;paola.navarro@email.com;88830005;1;true;true,true,true,false,false,true,false
+assist;20;Ricardo Brenes;ricardo.brenes@email.com;88830006;6;false;false,false,true,true,true,true,true

@@ -8,6 +8,8 @@ public class Utils {
     public static void loadUsersFromTxt(String filePath) {
         UserList = FilesTxt.loadUsersFromTxt(filePath);
     }
-    
+    public static void loadDatesFromTxt(String filePath) {
+        DateList = FilesTxt.loadDatesFromTxt(filePath, UserList);
+    }
 
 }

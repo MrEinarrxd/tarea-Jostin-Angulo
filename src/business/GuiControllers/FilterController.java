@@ -1,5 +1,7 @@
 package business.GuiControllers;
 
+import java.time.LocalDate;
+
 import javax.swing.JOptionPane;
 import business.UsersController;
 import domain.lists.List;
@@ -43,17 +45,19 @@ public class FilterController {
                     break;
                 case 2: // Filtrar por Fecha (rango)
                     try {
-                        String[] fechas = view.getDateFilterFTxTF().getText().split("-");
-                        if (fechas.length == 2) {
-                            java.time.LocalDate date1 = parseDate(fechas[0].trim());
-                            java.time.LocalDate date2 = parseDate(fechas[1].trim());
-                            Object[] clients = usersController.filterClientsWithDatesBetween(date1, date2, Utils.DateList);
-                            JOptionPane.showMessageDialog(view, clients != null ? java.util.Arrays.toString(clients) : "No encontrado");
+                        LocalDate[] dateRange = getSelectedDateRange();
+                        Object[] clients = usersController.filterUsersByDateRange(dateRange[0], dateRange[1], Utils.DateList);
+                        if (clients == null || clients.length == 0) {
+                            JOptionPane.showMessageDialog(view, "No hay clientes con citas en ese rango.");
                         } else {
-                            JOptionPane.showMessageDialog(view, "Formato de fecha incorrecto. Use dd/mm/yy-dd/mm/yy");
+                            String result = "";
+                            for (int i = 0; i < clients.length; i++) {
+                                result += clients[i] + "\n";
+                            }
+                            JOptionPane.showMessageDialog(view, result);
                         }
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(view, "Fechas inválidas");
+                        JOptionPane.showMessageDialog(view, "Rango de fechas inválido");
                     }
                     break;
                 default:
@@ -70,18 +74,22 @@ public class FilterController {
         });
     }
 
-    public void chooseMenuOption() {
-        view.setVisible(true);
+    private LocalDate[] getSelectedDateRange() {
+        String rango = view.getDateFilterFTxTF().getText().trim();
+        String[] fechas = rango.split("-");
+        LocalDate[] dateRange = new LocalDate[2];
+        for (int i = 0; i < 2; i++) {
+            String[] parts = fechas[i].trim().split("/");
+            int day = Integer.parseInt(parts[0]);
+            int month = Integer.parseInt(parts[1]);
+            int year = Integer.parseInt(parts[2]);
+            if (year < 100) year += 2000; // Ajuste para años de dos dígitos
+            dateRange[i] = LocalDate.of(year, month, day);
+        }
+        return dateRange;
     }
 
-    // Utilidad para parsear fechas en formato dd/mm/yy
-    private java.time.LocalDate parseDate(String text) {
-        String[] parts = text.split("/");
-        int day = Integer.parseInt(parts[0]);
-        int month = Integer.parseInt(parts[1]);
-        int year = Integer.parseInt(parts[2]);
-        // Ajuste para años de dos dígitos
-        if (year < 100) year += 2000;
-        return java.time.LocalDate.of(year, month, day);
+    public void showMenu() {
+        view.setVisible(true);
     }
 }

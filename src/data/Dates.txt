@@ -1,0 +1,10 @@
+1;2025-08-01;Vacunación;1;2025-08-01;1
+2;2025-08-03;Consulta general;0;2025-08-03;2
+3;2025-08-05;Desparasitación;2;2025-08-05;1
+4;2025-08-07;Control anual;1;2025-08-07;2
+5;2025-08-10;Cirugía menor;3;2025-08-10;1
+6;2025-08-12;Chequeo dental;0;2025-08-12;2
+7;2025-08-15;Consulta piel;2;2025-08-15;1
+8;2025-08-18;Vacunación refuerzo;1;2025-08-18;2
+9;2025-08-20;Emergencia;3;2025-08-20;1
+10;2025-08-22;Control post-operatorio;2;2025-08-22;2

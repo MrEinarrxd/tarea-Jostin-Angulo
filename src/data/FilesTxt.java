@@ -8,6 +8,7 @@ import domain.users.UserVet;
 import domain.users.UserAssist;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 public class FilesTxt {
@@ -95,4 +96,40 @@ public class FilesTxt {
             e.printStackTrace();
         }
     }
+
+    public static List loadDatesFromTxt(String filePath, List userList) {
+        List dateList = new List();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.trim().isEmpty() || line.startsWith("#")) continue;
+                String[] parts = line.split(";");
+                if (parts.length == 6) {
+                    int id = Integer.parseInt(parts[0]);
+                    LocalDate date = LocalDate.parse(parts[1]);
+                    String about = parts[2];
+                    int state = Integer.parseInt(parts[3]);
+                    LocalDate time = LocalDate.parse(parts[4]);
+                    int userId = Integer.parseInt(parts[5]);
+                    // Buscar el usuario por id en la lista de usuarios
+                    User user = null;
+                    UserNode current = userList.getFirstUserNode();
+                    while (current != null) {
+                        if (current.getUser().getId() == userId) {
+                            user = current.getUser();
+                            break;
+                        }
+                        current = current.getNext();
+                    }
+                    if (user != null) {
+                        dateList.addDate(new domain.Date(id, date, about, state, time, user), dateList);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dateList;
+    }
+
 }

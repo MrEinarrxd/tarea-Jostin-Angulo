@@ -1,7 +1,6 @@
 package business.GuiControllers;
 
-import javax.swing.JOptionPane;
-
+import presentation.ListGui;
 import business.UsersController;
 import domain.lists.Utils;
 
@@ -13,19 +12,27 @@ public class ListController {
     }
 
     public void showMenu() {
-        String input = JOptionPane.showInputDialog("Seleccione una opción:\n1. Listar Clientes\n2. Listar Asistentes\n3. Listar Veterinarios");
+        String input = javax.swing.JOptionPane.showInputDialog(
+            "Seleccione una opción:\n1. Listar Clientes\n2. Listar Asistentes\n3. Listar Veterinarios"
+        );
+        String result = "";
         switch (input) {
             case "1":
-                JOptionPane.showMessageDialog(null, userController.listClients(Utils.UserList));
+                result = userController.listClients(Utils.UserList);
                 break;
             case "2":
-                JOptionPane.showMessageDialog(null, userController.listAssistants(Utils.UserList));
+                result = userController.listAssistants(Utils.UserList);
                 break;
             case "3":
-                JOptionPane.showMessageDialog(null, userController.listVets(Utils.UserList));
+                result = userController.listVets(Utils.UserList);
                 break;
             default:
-                JOptionPane.showMessageDialog(null, "Opción no válida");
+                javax.swing.JOptionPane.showMessageDialog(null, "Opción no válida");
+                return;
         }
+        if (result == null || result.trim().isEmpty()) {
+            result = "No hay usuarios para mostrar.";
+        }
+        new ListGui(result).setVisible(true);
     }
 }

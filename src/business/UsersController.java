@@ -2,6 +2,7 @@ package business;
 
 import java.time.LocalDate;
 
+import data.FilesTxt;
 import domain.Date;
 import domain.lists.DateNode;
 import domain.lists.List;
@@ -16,11 +17,13 @@ public class UsersController {
 
     public UsersController() {
         Utils.loadUsersFromTxt("src/data/Users.txt");
+        Utils.loadDatesFromTxt("src/data/Dates.txt");
     }
 
     public boolean addUser(User user, List list) {
         if (user == null || list == null) return false;
         list.addUser(user, list);
+        FilesTxt.saveUsersToTxt(Utils.UserList, "src/data/Users.txt"); // <-- aquí
         return true;
     }
 
@@ -38,6 +41,7 @@ public class UsersController {
                 if (current.getNext() == null) {
                     list.setLastUserNode(previous);
                 }
+                FilesTxt.saveUsersToTxt(Utils.UserList, "src/data/Users.txt"); // <-- aquí
                 return true;
             }
             previous = current;
@@ -145,7 +149,7 @@ public class UsersController {
         return users;
     }
 
-    public UserClient[] filterClientsWithDatesBetween(LocalDate date1, LocalDate date2, domain.lists.List dateList) {
+    public UserClient[] filterUsersByDateRange(LocalDate date1, LocalDate date2, List dateList) {
         if (dateList == null || date1 == null || date2 == null) return null;
         if (date1.isAfter(date2)) return null;
 

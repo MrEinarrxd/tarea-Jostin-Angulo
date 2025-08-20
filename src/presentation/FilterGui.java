@@ -80,7 +80,7 @@ public class FilterGui extends JFrame {
         gbcFieldDate.gridx = 1; gbcFieldDate.gridy = 2;
         dateFilterFTxTF = new JFormattedTextField();
         dateFilterFTxTF.setColumns(15);
-        dateFilterFTxTF.setText("dd/mm/yy-dd/mm/yy");
+        dateFilterFTxTF.setText("dd/mm/yyyy-dd/mm/yyyy");
         panelCenter.add(dateFilterFTxTF, gbcFieldDate);
 
         // Botón Filtrar

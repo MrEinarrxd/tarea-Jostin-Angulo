@@ -83,8 +83,6 @@ public class FilterController {
             int day = Integer.parseInt(parts[0]);
             int month = Integer.parseInt(parts[1]);
             int year = Integer.parseInt(parts[2]);
-            if (year < 100) year += 2000; // Ajuste para años de dos dígitos
-            dateRange[i] = LocalDate.of(year, month, day);
         }
         return dateRange;
     }

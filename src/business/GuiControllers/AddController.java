@@ -2,7 +2,6 @@ package business.GuiControllers;
 
 import presentation.AddGui;
 import business.UsersController;
-import data.FilesTxt;
 import domain.lists.Utils;
 import domain.users.UserAssist;
 import domain.users.UserClient;

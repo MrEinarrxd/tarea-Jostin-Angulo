@@ -6,4 +6,3 @@ client;5;Andrea Soto;andrea.soto@email.com;88810005;Calle 5, Puntarenas;false
 client;6;Diego Rojas;diego.rojas@email.com;88810006;Calle 6, Limon;true
 client;7;Valeria Mora;valeria.mora@email.com;88810007;Calle 7, Guanacaste;false
 client;8;Oscar Ramirez;oscar.ramirez@email.com;88810008;Calle 8, San Carlos;true
-client;223;DFGSD;@@;32342344;SFGS;true

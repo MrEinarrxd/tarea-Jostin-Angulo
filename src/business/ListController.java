@@ -1,7 +1,6 @@
-package business.GuiControllers;
+package business;
 
 import presentation.ListGui;
-import business.UsersController;
 import domain.lists.Utils;
 
 public class ListController {

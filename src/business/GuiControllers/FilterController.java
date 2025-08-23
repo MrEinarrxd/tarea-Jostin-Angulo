@@ -1,8 +1,6 @@
 package business.GuiControllers;
 
 import java.time.LocalDate;
-
-import javax.swing.JOptionPane;
 import business.UsersController;
 import domain.lists.List;
 import domain.lists.Utils;

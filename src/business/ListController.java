@@ -4,16 +4,16 @@ import presentation.ListGui;
 import domain.lists.Utils;
 
 public class ListController {
+
     private UsersController userController;
 
     public ListController(UsersController userController) {
         this.userController = userController;
+
     }
 
     public void showMenu() {
-        String input = javax.swing.JOptionPane.showInputDialog(
-            "Seleccione una opción:\n1. Listar Clientes\n2. Listar Asistentes\n3. Listar Veterinarios"
-        );
+        String input = ListGui.showInputDialog("Seleccione una opción:\n1. Listar Clientes\n2. Listar Asistentes\n3. Listar Veterinarios");
         String result = "";
         switch (input) {
             case "1":
@@ -26,7 +26,7 @@ public class ListController {
                 result = userController.listVets(Utils.UserList);
                 break;
             default:
-                javax.swing.JOptionPane.showMessageDialog(null, "Opción no válida");
+                ListGui.showMessageDialog("Opción no válida");
                 return;
         }
         if (result == null || result.trim().isEmpty()) {

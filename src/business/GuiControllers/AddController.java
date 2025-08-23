@@ -7,8 +7,6 @@ import domain.users.UserAssist;
 import domain.users.UserClient;
 import domain.users.UserVet;
 
-import javax.swing.*;
-
 public class AddController {
     private AddGui view;
     private UsersController usersController;

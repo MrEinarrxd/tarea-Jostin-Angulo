@@ -40,6 +40,14 @@ public class ListGui extends JFrame {
         contentPane.add(panelSouth, BorderLayout.SOUTH);
     }
 
+    public static void showMessageDialog(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+
+    public static String showInputDialog(String message) {
+        return JOptionPane.showInputDialog(null, message);
+    }
+
     public void setResultText(String text) {
         textArea.setText(text);
     }

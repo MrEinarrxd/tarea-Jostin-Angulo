@@ -29,18 +29,26 @@ public class FilterController {
                     try {
                         int id = Integer.parseInt(view.getTextFieldIdFilter().getText());
                         Object result = usersController.findUser(id, userList);
-                        JOptionPane.showMessageDialog(view, result != null ? result : "No encontrado");
+                        if (result != null) {
+                            view.showMessageDialog(result.toString());
+                        } else {
+                            view.showMessageDialog("No encontrado");
+                        }
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(view, "ID inválido");
+                        view.showMessageDialog("ID inválido");
                     }
                     break;
                 case 1: // Filtrar por Día
                     try {
                         int day = Integer.parseInt(view.getTextFieldDayFilter().getText());
                         Object[] users = usersController.filterUsersByDay(day, userList);
-                        JOptionPane.showMessageDialog(view, users != null ? java.util.Arrays.toString(users) : "No encontrado");
+                        if (users != null) {
+                            view.showMessageDialog(java.util.Arrays.toString(users));
+                        } else {
+                            view.showMessageDialog("No encontrado");
+                        }
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(view, "Día inválido");
+                        view.showMessageDialog("Día inválido");
                     }
                     break;
                 case 2: // Filtrar por Fecha (rango)
@@ -48,20 +56,20 @@ public class FilterController {
                         LocalDate[] dateRange = getSelectedDateRange();
                         Object[] clients = usersController.filterUsersByDateRange(dateRange[0], dateRange[1], Utils.DateList);
                         if (clients == null || clients.length == 0) {
-                            JOptionPane.showMessageDialog(view, "No hay clientes con citas en ese rango.");
+                            view.showMessageDialog("No hay clientes con citas en ese rango.");
                         } else {
                             String result = "";
                             for (int i = 0; i < clients.length; i++) {
                                 result += clients[i] + "\n";
                             }
-                            JOptionPane.showMessageDialog(view, result);
+                            view.showMessageDialog(result);
                         }
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(view, "Rango de fechas inválido");
+                        view.showMessageDialog("Rango de fechas inválido");
                     }
                     break;
                 default:
-                    JOptionPane.showMessageDialog(view, "Opción no válida");
+                    view.showMessageDialog("Opción no válida");
             }
         });
 

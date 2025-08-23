@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Component;
@@ -130,6 +131,19 @@ public class AddGui extends JFrame {
         gbcBtnAgregar.anchor = GridBagConstraints.CENTER;
         btnAgregar = new JButton("Agregar");
         panelCenter.add(btnAgregar, gbcBtnAgregar);
+    }
+
+    public void printMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
+
+    public String showInputDialog(String message) {
+        return JOptionPane.showInputDialog(this, message);
+    }
+
+    public String showConfirmDialog(String message, String title) {
+        int result = JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION ? "Sí" : "No";
     }
 
     // Métodos públicos para acceder a los campos desde el controlador

@@ -105,6 +105,10 @@ public class FilterGui extends JFrame {
         });
     }
 
+    public void showMessageDialog(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+
     // Métodos públicos para acceder a los campos desde el controlador
     public JComboBox<String> getComboBox() {
         return comboBox;
